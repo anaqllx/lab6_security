@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head><title>Управління 2FA</title></head>
+<body>
+    <h1>Управління Двохфакторною Аутентифікацією</h1>
+
+    {% if message %}
+        <p style="color:blue;">{{ message }}</p>
+    {% endif %}
+
+    {% if secret %}
+        <hr>
+        <h3>Секретний ключ для налаштування (УВАГА! КОПІЮЙТЕ ЙОГО!):</h3>
+        <p><strong>{{ secret }}</strong></p>
+        <p>Введіть цей ключ у свій додаток-аутентифікатор.</p>
+        <hr>
+    {% endif %}
+
+
+    {% if is_enabled %}
+        <p style="color:green;">Статус: 2FA **УВІМКНЕНО**.</p>
+        <form method="POST">
+            <input type="hidden" name="action" value="disable">
+            <input type="submit" value="Вимкнути 2FA">
+        </form>
+    {% else %}
+        <p style="color:red;">Статус: 2FA **ВИМКНЕНО**.</p>
+        <form method="POST">
+            <input type="hidden" name="action" value="enable">
+            <input type="submit" value="Увімкнути 2FA">
+        </form>
+    {% endif %}
+
+    <p><a href="{{ url_for('index') }}">Повернутися до профілю</a></p>
+</body>
+</html>

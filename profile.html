@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head><title>Профіль</title></head>
+<body>
+    <h1>Вітаємо, {{ username }}!</h1>
+    
+    {% if message %}
+        <p style="color:green;">{{ message }}</p>
+    {% endif %}
+
+    <h2>Налаштування Безпеки</h2>
+    <p>Статус 2FA: 
+        {% if is_2fa_enabled %}
+            <span style="color:green;">Увімкнено</span>
+        {% else %}
+            <span style="color:red;">Вимкнено</span>
+        {% endif %}
+    </p>
+
+    <p>Управління 2FA: <a href="{{ url_for('manage_2fa') }}">Перейти до налаштувань 2FA</a></p>
+    <hr>
+    <p><a href="{{ url_for('logout') }}">Вийти з системи</a></p>
+</body>
+</html>

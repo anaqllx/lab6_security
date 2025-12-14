@@ -17,7 +17,7 @@ app = Flask(__name__)
 app.secret_key = os.urandom(24) 
 
 GOOGLE_CLIENT_ID = "463820688884-cinqj4ruq3s8mqm5fqto4ibcs9tb95ol.apps.googleusercontent.com" 
-GOOGLE_CLIENT_SECRET = "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" 
+GOOGLE_CLIENT_SECRET = os.environ.get('GOOGLE_CLIENT_SECRET')
 
 # 2. Ініціалізація OAuth
 oauth = OAuth(app)

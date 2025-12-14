@@ -8,12 +8,28 @@ on:
 jobs:
   sonarqube:
     name: SonarQube
+    # Залишаємо windows-latest, як у тебе було
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+          fetch-depth: 0 # Shallow clones should be disabled for a better relevancy of analysis
+
+      # 1. ДОДАЄМО КРОК ВСТАНОВЛЕННЯ PYTHON
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      # 2. ДОДАЄМО КРОК ВСТАНОВЛЕННЯ ЗАЛЕЖНОСТЕЙ
+      - name: Install dependencies
+        run: pip install flask authlib pyotp # Можливо, потрібно більше, залежно від твого проекту
+
+      # 3. КРОК SKANNING SONARQUBE
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v6
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          # ДОДАЄМО СЕКРЕТНИЙ КЛЮЧ GOOGLE ДЛЯ АНАЛІЗУ
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }} 
+        # Не забувай, що secrets.GOOGLE_CLIENT_SECRET має бути створений у налаштуваннях репозиторію!

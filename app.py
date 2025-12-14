@@ -11,6 +11,7 @@ from secure_auth import (
 )
 
 # ІНІЦІАЛІЗАЦІЯ FLASK та OAUTH
+# ІНІЦІАЛІЗАЦІЯ FLASK та OAUTH
 # 1. Створення основного об'єкту Flask 
 app = Flask(__name__)
 app.secret_key = os.urandom(24) 
